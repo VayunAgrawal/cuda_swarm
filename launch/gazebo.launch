@@ -1,5 +1,18 @@
 <?xml version="1.0"?>
 
 <launch>
-	<include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+  <arg name="paused" default="false"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find cuda_swarm)/world/swarm.world"/>
+    <arg name="paused" value="$(arg paused)" />
+  </include>
+	<include file="$(find cuda_swarm)/launch/swarms/swarm0-24.launch"/>
+
+	<node pkg="joy" type="joy_node" name="ps4_joy" output="screen" >
+		<param name="dev" type="string" value="/dev/input/js0" />
+		<param name="deadzone" value="0.12" />
+		<param name="autorepeat_rate" value="100.0" />
+	</node>
+	<!--<node pkg="cuda_swarm" type="sin_path.py" name="swarm_controller" output="screen"/>-->
 </launch>

@@ -23,11 +23,12 @@ def joy_callback(msg):
 rospy.init_node('joystick', anonymous=True)
 
 swarm_pub = rospy.Publisher('/gazebo/set_model_state', ModelState, queue_size=1000)
-swarm_msg = [ModelState() for _ in xrange(100)]
-for i in xrange(100):
+rospy.Subscriber('/joy', Joy, joy_callback)
+swarm_msg = [ModelState() for _ in xrange(25)]
+for i in xrange(25):
 	swarm_msg[i].model_name = 'quadrotor' + str(i)
 
-rospy.Subscriber('/joy', Joy, joy_callback)
+
 
 dt = 0.1
 x = 0
@@ -41,7 +42,7 @@ while not rospy.is_shutdown():
 
 	q = quaternion_from_euler(-0.25*vy, 0.25*vx, 0)
 
-	for i in xrange(100):
+	for i in xrange(25):
 		swarm_msg[i].pose.position.x = x + floor(i/10)
 		swarm_msg[i].pose.position.y = y + i%10
 		swarm_msg[i].pose.position.z = z

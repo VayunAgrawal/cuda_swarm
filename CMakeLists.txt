@@ -8,11 +8,11 @@ find_package(catkin REQUIRED COMPONENTS
   tf
 )
 
-find_package(CUDA REQUIRED)
+#find_package(CUDA REQUIRED)
 
 catkin_package()
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-cuda_add_executable(move_swarm src/move_swarm.cu)
-target_link_libraries(move_swarm ${catkin_LIBRARIES})
+#cuda_add_executable(move_swarm src/move_swarm.cu)
+#target_link_libraries(move_swarm ${catkin_LIBRARIES})
